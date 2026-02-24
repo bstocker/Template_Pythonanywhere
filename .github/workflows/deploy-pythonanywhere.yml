@@ -45,22 +45,26 @@ jobs:
             -H "Authorization: Token ${TOKEN}" \
             -F "content=@app.zip" \
             "https://www.pythonanywhere.com/api/v0/user/${USER}/files/path${TARGET_DIR}/app.zip"
-
-      # Unzip and (optionally) create venv + install deps + reload webapp
-      - name: Unzip, install deps, reload webapp
+       
+       # Unzip
+      - name: Unzip (test+extract), install deps, reload webapp
         run: |
           USER="${{ secrets.PA_USERNAME }}"
           TOKEN="${{ secrets.PA_TOKEN }}"
           TARGET_DIR="${{ secrets.PA_TARGET_DIR }}"
           DOMAIN="${{ secrets.PA_WEBAPP_DOMAIN }}"
 
-          # Run commands on a bash console (API)
           curl -sS -X POST \
             -H "Authorization: Token ${TOKEN}" \
             "https://www.pythonanywhere.com/api/v0/user/${USER}/consoles/bash/" \
             -d "executable=/bin/bash" \
             -d "arguments=-lc" \
-            -d "arguments=cd '${TARGET_DIR}' && unzip -o app.zip && python3 -m venv .venv && . .venv/bin/activate && pip install -U pip && pip install -r requirements.txt" \
+            -d "arguments=set -e; cd '${TARGET_DIR}'; pwd; ls -la; echo '--- unzip test ---'; unzip -t app.zip; echo '--- unzip extract ---'; unzip -o app.zip -d .; echo '--- after extract ---'; ls -la; python3 -m venv .venv; . .venv/bin/activate; pip install -U pip; pip install -r requirements.txt" \
+            >/dev/null
+
+          curl -sS -X POST \
+            -H "Authorization: Token ${TOKEN}" \
+            "https://www.pythonanywhere.com/api/v0/user/${USER}/webapps/${DOMAIN}/reload/" \
             >/dev/null
 
           # Reload web app
