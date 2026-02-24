@@ -1,4 +1,4 @@
-name: Deploy to PythonAnywhere
+name: Deploy to PythonAnywhere (simple)
 
 on:
   push:
@@ -10,28 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Validate required secrets
-        run: |
-          test -n "${{ secrets.PA_USERNAME }}"
-          test -n "${{ secrets.PA_TOKEN }}"
-          test -n "${{ secrets.PA_TARGET_DIR }}"
-          test -n "${{ secrets.PA_WEBAPP_DOMAIN }}"
-
-      - name: Create zip artifact
-        run: |
-          zip -r app.zip app.py requirements.txt README.md
-
-      # Upload code to PythonAnywhere using its Files API
-      - name: Upload zip to PythonAnywhere (Files API)
+      - name: Upload flask_app.py to PythonAnywhere
         run: |
           USER="${{ secrets.PA_USERNAME }}"
           TOKEN="${{ secrets.PA_TOKEN }}"
           TARGET_DIR="${{ secrets.PA_TARGET_DIR }}"
 
-          # 1) ensure target dir exists by creating it via bash on PythonAnywhere
+          # 1) Ensure target dir exists
           curl -sS -X POST \
             -H "Authorization: Token ${TOKEN}" \
             "https://www.pythonanywhere.com/api/v0/user/${USER}/consoles/bash/" \
@@ -40,34 +27,18 @@ jobs:
             -d "arguments=mkdir -p '${TARGET_DIR}'" \
             >/dev/null
 
-          # 2) upload zip into target dir
+          # 2) Upload the single file (no zip)
           curl -sS -X POST \
             -H "Authorization: Token ${TOKEN}" \
-            -F "content=@app.zip" \
-            "https://www.pythonanywhere.com/api/v0/user/${USER}/files/path${TARGET_DIR}/app.zip"
-       
-       # Unzip
-      - name: Unzip (test+extract), install deps, reload webapp
+            -F "content=@flask_app.py" \
+            "https://www.pythonanywhere.com/api/v0/user/${USER}/files/path${TARGET_DIR}/flask_app.py"
+
+      - name: Reload PythonAnywhere webapp
         run: |
           USER="${{ secrets.PA_USERNAME }}"
           TOKEN="${{ secrets.PA_TOKEN }}"
-          TARGET_DIR="${{ secrets.PA_TARGET_DIR }}"
           DOMAIN="${{ secrets.PA_WEBAPP_DOMAIN }}"
 
-          curl -sS -X POST \
-            -H "Authorization: Token ${TOKEN}" \
-            "https://www.pythonanywhere.com/api/v0/user/${USER}/consoles/bash/" \
-            -d "executable=/bin/bash" \
-            -d "arguments=-lc" \
-            -d "arguments=set -e; cd '${TARGET_DIR}'; pwd; ls -la; echo '--- unzip test ---'; unzip -t app.zip; echo '--- unzip extract ---'; unzip -o app.zip -d .; echo '--- after extract ---'; ls -la; python3 -m venv .venv; . .venv/bin/activate; pip install -U pip; pip install -r requirements.txt" \
-            >/dev/null
-
-          curl -sS -X POST \
-            -H "Authorization: Token ${TOKEN}" \
-            "https://www.pythonanywhere.com/api/v0/user/${USER}/webapps/${DOMAIN}/reload/" \
-            >/dev/null
-
-          # Reload web app
           curl -sS -X POST \
             -H "Authorization: Token ${TOKEN}" \
             "https://www.pythonanywhere.com/api/v0/user/${USER}/webapps/${DOMAIN}/reload/" \
