@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------------------------------
-PROJET ARCHITECTURE SI
+🎯PROJET ARCHITECTURE SI
 ------------------------------------------------------------------------------------------------------
 Pitch de l'atelier.  
 
@@ -8,7 +8,7 @@ Pitch de l'atelier.
 ![Screenshot Actions](Architecture_cible.png)  
 
 -------------------------------------------------------------------------------------------------------
-Séquence 1 : GitHUB
+🧩 Séquence 1 : GitHUB
 -------------------------------------------------------------------------------------------------------
 Objectif : Création d'un Repository GitHUB pour travailler avec son projet  
 Difficulté : Très facile (~10 minutes)
@@ -16,7 +16,7 @@ Difficulté : Très facile (~10 minutes)
 **Faites un Fork de ce projet**. Si besoin, voici une vidéo d'accompagnement pour vous aider à "Forker" un Repository Github : [Forker ce projet](https://youtu.be/p33-7XQ29zQ)  
 
 ---------------------------------------------------
-Séquence 2 : Création d'un site chez Pythonanywhere
+🧩 Séquence 2 : Création d'un site chez Pythonanywhere
 ---------------------------------------------------
 Objectif : Créer un hébergement sur Pythonanywhere  
 Difficulté : Faible (~10 minutes)
@@ -25,7 +25,7 @@ Difficulté : Faible (~10 minutes)
 Rendez-vous sur **https://www.pythonanywhere.com/** et créez vous un compte.  
   
 ---------------------------------------------------------------------------------------------
-Séquence 3 : Les Actions GitHUB (Industrialisation Continue)
+🧩 Séquence 3 : Les Actions GitHUB (Industrialisation Continue)
 ---------------------------------------------------------------------------------------------
 Objectif : Automatiser la mise à jour de votre hébergement Pythonanywhere  
 Difficulté : Moyenne (~15 minutes)
@@ -48,7 +48,7 @@ Vous avez vu dans cette séquence comment créer des secrets GiHUB afin de mettr
 L'utilité des scripts d'actions (C'est à dire des scripts exécutés lors des Commits) est très importante mais sortes malheureusement du cadre de cet atelier faute de temps. Toutefois, je vous invites à découvrir cet outil via les différentes sources du Web (Google, ChatGPT, etc..).  
 
 ---------------------------------------------------
-Séquence 4 : Mise en service
+🗺️ Séquence 4 : Mise en service
 ---------------------------------------------------
 Objectif : ...  
 Difficulté : Faible (~10 minutes)
@@ -56,7 +56,7 @@ Difficulté : Faible (~10 minutes)
    
 
 ---------------------------------------------------
-Séquence 5 : Exercices
+🔹 Séquence 5 : Exercices
 ---------------------------------------------------
 Objectif : Travailler..  
 Difficulté : Moyenne (~60 minutes)
@@ -70,7 +70,7 @@ Cette nouvelle route "/fiche_nom/" est soumise à un contrôle d'accès User. C'
 Pour accéder à cette fonctionnalité, l'utilisateur sera authentifié sous les login et mot de passe suivant : **user/12345**
   
 ---------------------------------------------------
-Séquence 6 : Atelier
+🔹 Séquence 6 : Atelier
 ---------------------------------------------------
 Objectif : Créer une application de biliothèque  
 Difficulté : Moyenne (~180 minutes)
@@ -78,7 +78,7 @@ Difficulté : Moyenne (~180 minutes)
 ...  
 
 --------------------------------------------------------------------
-Troubleshooting :
+🧠 Troubleshooting :
 ---------------------------------------------------
 Objectif : Visualiser ses logs et découvrir ses erreurs
 ---------------------------------------------------
