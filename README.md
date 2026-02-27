@@ -35,6 +35,7 @@ Dans le Repository GitHUB que vous venez de créer précédemment lors de la sé
 Pour utiliser cette Action (deploy-pythonanywhere.yml), **vous avez besoin de créer des secrets dans GitHUB** afin de ne pas divulguer des informations sensibles aux internautes de passage dans votre Repository comme vos login et password par exemple.  
 
 Pour cet atelier, **vous avez 4 secrets à créer** dans votre Repository GitHUB : **Settings → Secrets and variables → Actions → New repository secret**  
+  
 **PA_USERNAME** = votre username PythonAnywhere.  
 **PA_TOKEN** = votre API token. Token à créer dans pythonanywhere (Acount → API Token).  
 **PA_TARGET_DIR** = Web → Source code (ex: /home/monuser/myapp).  
